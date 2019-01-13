@@ -2,24 +2,41 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('pagination');
+        $this->load->helper('url');
+        $this->load->helper('html');
+        $this->load->model('MainModels');
+        $this->load->database();
+    }
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+	    $table = 'profession';
+        $data['profession'] = $this->MainModels->selectAllArray($table);
+		$this->load->view('index',$data);
 	}
+
+	public function profession($name){
+        $table_name = $name.'_questions';
+
+        $config['base_url'] = base_url() . "Welcome/profession/$name/";
+        $config['total_rows'] = $this->db->count_all($table_name);
+        $config['per_page'] = 1;
+        $config['full_tag_open'] = '<div class="pagination">';
+        $config['full_tag_close'] = '</div>';
+        $config['next_link'] = 'Следующая';
+
+        $config['prev_link'] = '';
+        $config['display_pages'] = FALSE;
+
+
+        $this->pagination->initialize($config);
+
+        $data['question']  = $this->MainModels->selectAll($table_name, $config['per_page'], $this->uri->segment(4));
+
+        $this->load->view('profession',$data);
+    }
 }
