@@ -15,19 +15,29 @@
             <?php foreach ($question as $row):?>
                 <li><?=$row['question']?></li>
                 <div class="checkbox">
-                    <label><input type="checkbox" value=""><?=$row['answer_1']?></label>
+                    <?php if (!empty($row['answer_1'])): ?>
+                        <label><input type="checkbox" value=""><?=$row['answer_1']?></label>
+                    <?php endif; ?>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" value=""><?=$row['answer_2']?></label>
+                    <?php if (!empty($row['answer_2'])): ?>
+                        <label><input type="checkbox" value=""><?=$row['answer_2']?></label>
+                    <?php endif; ?>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" value=""><?=$row['answer_3']?></label>
+                    <?php if (!empty($row['answer_3'])): ?>
+                        <label><input type="checkbox" value=""><?=$row['answer_3']?></label>
+                    <?php endif; ?>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" value=""><?=$row['answer_4']?></label>
+                    <?php if (!empty($row['answer_4'])): ?>
+                        <label><input type="checkbox" value=""><?=$row['answer_4']?></label>
+                    <?php endif; ?>
                 </div>
                 <div class="checkbox">
-                    <label><input type="checkbox" value=""><?=$row['answer_4']?></label>
+                    <?php if (!empty($row['answer_5'])): ?>
+                        <label><input type="checkbox" value=""><?=$row['answer_5']?></label>
+                    <?php endif; ?>
                 </div>
 
             <?php endforeach;?>
