@@ -38,5 +38,14 @@ class Welcome extends CI_Controller {
         $data['question']  = $this->MainModels->selectAll($table_name, $config['per_page'], $this->uri->segment(4));
 
         $this->load->view('profession',$data);
+
+
+        // проверить на пустоту, сколько полей имеет запись, и передать в views  и там нужно for i
+        for ($x=1; $x=5; $x++){
+            $answer = 'answer_'.$x;
+            $$this->db->query("Select $answer FROM $table_name");
+//            if ()
+        }
+
     }
 }

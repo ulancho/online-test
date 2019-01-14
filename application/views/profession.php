@@ -14,6 +14,22 @@
         <ul class="list-unstyled">
             <?php foreach ($question as $row):?>
                 <li><?=$row['question']?></li>
+                <div class="checkbox">
+                    <label><input type="checkbox" value=""><?=$row['answer_1']?></label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value=""><?=$row['answer_2']?></label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value=""><?=$row['answer_3']?></label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value=""><?=$row['answer_4']?></label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value=""><?=$row['answer_4']?></label>
+                </div>
+
             <?php endforeach;?>
         </ul>
     </div>
