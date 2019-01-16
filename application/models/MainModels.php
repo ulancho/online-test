@@ -7,7 +7,26 @@ class MainModels extends CI_Model
     {
         parent::__construct();
         $this->load->database();
+    }
 
+    public function addTest($row){
+        $string = array(
+            'name' => $row['name'],
+            'table_name' => $row['table_name'],
+        );
+        $this->db->insert('profession', $string);
+        return $this->db->insert_id();
+    }
+    // Select with where po id
+    public function getId($tablename, $id)
+    {
+        $sql = "SELECT * FROM $tablename WHERE id = ?  LIMIT 1";
+        $query = $this->db->query($sql, array($id));
+        if ($query) {
+            return $query->result();
+        } else {
+            return false;
+        }
     }
 
     public function selectAllArray($table)

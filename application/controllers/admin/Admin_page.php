@@ -6,7 +6,6 @@ class Admin_page extends CI_Controller
 
     public function __construct()
     {
-
         parent::__construct();
         $this->load->library('session');
         $this->load->model('UserModel');
@@ -18,11 +17,6 @@ class Admin_page extends CI_Controller
 //загрузка страницы логина
     public function index()
     {
-//       $this->load->library('password');
-//       $pwd = "123";
-//       $name =  $this->password->create_hash($pwd);
-//       print_r($name);
-//       die;
         $this->load->view('admin/header');
         $this->load->view('admin/login_form');
         $this->load->view('admin/footer');
@@ -72,11 +66,9 @@ class Admin_page extends CI_Controller
 //Загузка админ странички
     public function admin()
     {
-        $data['box'] = $this->db->count_all('box');
-        $data['fruits'] = $this->db->count_all('fruits');
-        $data['vegetables'] = $this->db->count_all('vegetables');
-        $data['news'] = $this->db->count_all('news');
-        $data['partners'] = $this->db->count_all('partners');
+        $query = $this->db->query("SELECT * FROM profession");
+        $data['profession'] = $query->result_array();
+
         $arraydata = $this->session->userdata['login'];
         if (empty($arraydata)) {
             redirect(site_url() . 'admin/Admin_page/');
@@ -87,7 +79,6 @@ class Admin_page extends CI_Controller
             $this->load->view('admin/footer');
         }
     }
-
     //Logout
     public function logout()
     {
