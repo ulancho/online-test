@@ -45,3 +45,29 @@ function fileNone(cont) {
     }
 
 }
+
+function checkboxFile(context) {
+    var elements = context.parentElement.parentElement.previousElementSibling.childNodes;
+
+
+    var code_answer = context.getAttribute('data-code_answer');
+
+    if (context.checked === true) {
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].className === 'form-control') {
+                elements[i].setAttribute('name', 'name-' + code_answer);
+                elements[i].style.border = '2px solid black';
+                elements[i].removeAttribute('disabled');
+            }
+        }
+    } else {
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].className === 'form-control') {
+                elements[i].removeAttribute('name');
+                elements[i].style.border = '1px solid #ccc';
+                elements[i].setAttribute('disabled', 'disabled');
+                elements[i].value = '';
+            }
+        }
+    }
+}

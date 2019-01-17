@@ -9,11 +9,12 @@
     </div>
         <div class="form-group">
             <label class="checkbox-inline"><input name="img-status" onchange="fileNone(this)" type="checkbox" value="1">фото-ответ</label>
-    </div>
+        </div>
         <div class="form-group row">
             <div class="col-sm-8 str">
                 <label for="usr">Ответ №1:</label>
                 <input readonly="readonly" type="text" class="form-control" id="usr">
+                <input type="hidden" name="name-1" value="name-1">
             </div>
             <div class="col-sm-2 str">
                 <br>
@@ -23,11 +24,15 @@
             </div>
             <div class="col-sm-8 file">
                 <br>
-                <div class="form-group">
-                    <input name="name-1" type="file" class="form-control">
-                </div>
+                    <input type="file" class="form-control" disabled>
             </div>
+            <div class="col-sm-2 file">
+                <br>
+                <label class="checkbox-inline">
+                    <input data-code_answer="1" onchange="checkboxFile(this)" type="checkbox" value="">
+                </label>
             </div>
+        </div>
             <div class="form-group row">
                 <div class="col-sm-8 str">
                     <label for="usr">Ответ №2:</label>
@@ -41,9 +46,13 @@
                 </div>
                 <div class="col-sm-8 file">
                     <br>
-                    <div class="form-group">
-                        <input name="name-2" type="file" class="form-control">
-                    </div>
+                        <input type="file" class="form-control" disabled>
+                </div>
+                <div class="col-sm-2 file">
+                    <br>
+                    <label class="checkbox-inline">
+                        <input data-code_answer="1" onchange="checkboxFile(this)" type="checkbox" value="">
+                    </label>
                 </div>
                 </div>
                 <div class="form-group row">
@@ -59,9 +68,13 @@
                     </div>
                     <div class="col-sm-8 file">
                         <br>
-                        <div class="form-group">
-                            <input name="name-3" type="file" class="form-control">
-                        </div>
+                            <input type="file" class="form-control" disabled>
+                    </div>
+                    <div class="col-sm-2 file">
+                        <br>
+                        <label class="checkbox-inline">
+                            <input data-code_answer="1" onchange="checkboxFile(this)" type="checkbox" value="">
+                        </label>
                     </div>
                     </div>
                     <div class="form-group row">
@@ -77,9 +90,13 @@
                         </div>
                         <div class="col-sm-8 file">
                             <br>
-                            <div class="form-group">
-                                <input name="name-4" type="file" class="form-control">
-                            </div>
+                                <input type="file" class="form-control" disabled>
+                        </div>
+                        <div class="col-sm-2 file">
+                            <br>
+                            <label class="checkbox-inline">
+                                <input data-code_answer="1" onchange="checkboxFile(this)" type="checkbox" value="">
+                            </label>
                         </div>
                         </div>
                         <div class="form-group row">
@@ -95,9 +112,13 @@
                             </div>
                             <div class="col-sm-8 file">
                                 <br>
-                                <div class="form-group">
-                                    <input name="name-5" type="file" class="form-control">
-                                </div>
+                                    <input  type="file" class="form-control" disabled>
+                            </div>
+                            <div class="col-sm-2 file">
+                                <br>
+                                <label class="checkbox-inline">
+                                    <input data-code_answer="1" onchange="checkboxFile(this)" type="checkbox" value="">
+                                </label>
                             </div>
                             </div>
         <div class="form-group">

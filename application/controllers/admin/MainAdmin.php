@@ -124,19 +124,38 @@ class MainAdmin extends CI_Controller
     }
     //Процесс добавление вопроса
     public function addQuest(){
+        $location = 'answer-photo';
+        $ans1 = '';
+        $answer1 = $this->do_upload($location, $ans1) ?? "";
         echo "<pre>";
-        print_r($_FILES);
+        print_r($answer1);
         echo "</pre>";
         die();
-        $questions = $this->input->post('questions') ?? "";
-        $answer1 = $this->input->post('name-1') ?? "";
 
-        $answer2 = $this->input->post('name-2') ?? "";
-        $answer3 = $this->input->post('name-3') ?? "";
-        $answer4 = $this->input->post('name-4') ?? "";
-        $answer5 = $this->input->post('name-5') ?? "";
-
+        $location = 'answer-photo';
         $img_status = $this->input->post('img-status') ?? "";
+        $questions = $this->input->post('questions') ?? "";
+        if (!empty($img_status)){
+            $ans1 = 'name-1';
+            $ans2 = 'name-2';
+            $ans3 = 'name-3';
+            $ans4 = 'name-4';
+            $ans5 = 'name-5';
+            $answer1 = $this->do_upload($location, $ans1) ?? "";
+            $answer2 = $this->do_upload($location, $ans2) ?? "";
+            $answer3 = $this->do_upload($location, $ans3) ?? "";
+            $answer4 = $this->do_upload($location, $ans4) ?? "";
+            $answer5 = $this->do_upload($location, $ans5) ?? "";
+        }
+        else{
+            $answer1 = $this->input->post('name-1') ?? "";
+            $answer2 = $this->input->post('name-2') ?? "";
+            $answer3 = $this->input->post('name-3') ?? "";
+            $answer4 = $this->input->post('name-4') ?? "";
+            $answer5 = $this->input->post('name-5') ?? "";
+        }
+
+
 
         $json = [];
         for ($i=1; $i<=5; $i++){
@@ -145,7 +164,6 @@ class MainAdmin extends CI_Controller
                 $json[] = $i;
             }
         }
-
         $correct_answer = json_encode($json);
 
         $data = array(
@@ -178,7 +196,9 @@ class MainAdmin extends CI_Controller
         if (!$this->upload->do_upload($name)) {
             return array('error' => $this->upload->display_errors());
         } else {
-            return array('upload_data' => $this->upload->data());
+            $photo = $this->upload->data();
+            $photo = $photo['file_name'];
+            return $photo;
         }
     }
 
