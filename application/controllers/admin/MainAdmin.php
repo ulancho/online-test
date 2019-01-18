@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MainAdmin extends CI_Controller
 {
+     public  $_id_professions;
     public function __construct()
     {
         parent::__construct();
@@ -21,6 +22,7 @@ class MainAdmin extends CI_Controller
     }
 
     public function all($id){
+        $this->_id_professions = $id;
         $table = 'profession';
         $data['prof'] = $this->MainModels->getId($table,$id);
         $table_name = $data['prof'][0]->table_name.'_questions';
@@ -31,7 +33,6 @@ class MainAdmin extends CI_Controller
         $this->load->view('admin/all',$data);
         $this->load->view('admin/footer');
     }
-
     //создание таблицы для вопроса и ответов
     private function createTable($table){
         $table_name = $table.'_questions';
@@ -115,6 +116,9 @@ class MainAdmin extends CI_Controller
     }
     //добавление вопроса
     public function addQuestions($name){
+        print_r($this->_id_professions);
+        die();
+            $data['allid'] =  $this->_id_professions;
             $data['table_name'] = $name;
             $this->load->view('admin/header');
             $this->load->view('admin/navbar');
@@ -125,16 +129,13 @@ class MainAdmin extends CI_Controller
     //Процесс добавление вопроса
     public function addQuest(){
         $location = 'answer-photo';
-        $ans1 = '';
-        $answer1 = $this->do_upload($location, $ans1) ?? "";
-        echo "<pre>";
-        print_r($answer1);
-        echo "</pre>";
-        die();
-
-        $location = 'answer-photo';
+        $location_question = 'question-photo';
+        $questions_file = 'questions_file';
         $img_status = $this->input->post('img-status') ?? "";
         $questions = $this->input->post('questions') ?? "";
+        $table_name =  $this->input->post('table');
+        $questions_file = $this->do_upload($location_question, $questions_file) ?? "";
+        $table = $table_name.'_questions';
         if (!empty($img_status)){
             $ans1 = 'name-1';
             $ans2 = 'name-2';
@@ -174,10 +175,17 @@ class MainAdmin extends CI_Controller
             'answer_4' => $answer4,
             'answer_5' => $answer5,
             'img_status' => $img_status,
-            'correct_answer' => $correct_answer
+            'correct_answer' => $correct_answer,
+            'img_name' => $questions_file,
         );
 
-        $this->db->insert('design_questions', $data);
+
+        if (!$this->db->insert($table, $data)) {
+            $this->session->set_flashdata('flash_message', 'Не удалось добавить данные!');
+        } else {
+            $this->session->set_flashdata('success_message', 'Данные успешно добавлены!');
+        }
+        redirect(site_url() . "admin/MainAdmin/addQuestions/$table_name");
 
     }
 
@@ -194,7 +202,8 @@ class MainAdmin extends CI_Controller
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload($name)) {
-            return array('error' => $this->upload->display_errors());
+            $empty = '';
+            return $empty;
         } else {
             $photo = $this->upload->data();
             $photo = $photo['file_name'];
