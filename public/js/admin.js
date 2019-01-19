@@ -49,7 +49,6 @@ function fileNone(cont) {
 function checkboxFile(context) {
     var elements = context.parentElement.parentElement.previousElementSibling.childNodes;
 
-
     var code_answer = context.getAttribute('data-code_answer');
 
     if (context.checked === true) {

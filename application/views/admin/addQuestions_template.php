@@ -10,7 +10,7 @@
         </div>
     <?php endif; ?>
         <strong><center>Добваление вопроса и ответов</center></strong>
-    <a href="<?=base_url()?>admin/MainSections/all/<?=$allid?>" class="text-primary">ПЕРЕЙТИ К ПРОСМОТРУ</a>
+    <a href="<?=base_url()?>admin/MainAdmin/all/<?=$allid?>" class="text-primary">ПЕРЕЙТИ К ПРОСМОТРУ</a>
     <h4>Пожалуйста, введите необходимую информацию ниже</h4>
     <form action="<?=base_url()?>admin/MainAdmin/addQuest" method="post" enctype="multipart/form-data">
     <div class="form-group">

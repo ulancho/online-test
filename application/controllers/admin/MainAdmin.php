@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MainAdmin extends CI_Controller
 {
-     public  $_id_professions;
     public function __construct()
     {
         parent::__construct();
@@ -22,7 +21,7 @@ class MainAdmin extends CI_Controller
     }
 
     public function all($id){
-        $this->_id_professions = $id;
+
         $table = 'profession';
         $data['prof'] = $this->MainModels->getId($table,$id);
         $table_name = $data['prof'][0]->table_name.'_questions';
@@ -116,10 +115,16 @@ class MainAdmin extends CI_Controller
     }
     //добавление вопроса
     public function addQuestions($name){
-        print_r($this->_id_professions);
-        die();
-            $data['allid'] =  $this->_id_professions;
             $data['table_name'] = $name;
+            $sql = "SELECT id FROM profession WHERE table_name = ?  LIMIT 1";
+            $query = $this->db->query($sql, array($name));
+            if ($query) {
+                $query = $query->result_array();
+                $data['allid'] = $query[0]['id'];
+
+            } else {
+            return false;
+            }
             $this->load->view('admin/header');
             $this->load->view('admin/navbar');
             $this->load->view('admin/addQuestions_template',$data);
@@ -156,8 +161,6 @@ class MainAdmin extends CI_Controller
             $answer5 = $this->input->post('name-5') ?? "";
         }
 
-
-
         $json = [];
         for ($i=1; $i<=5; $i++){
             $right = 'right-'.$i;
@@ -187,6 +190,22 @@ class MainAdmin extends CI_Controller
         }
         redirect(site_url() . "admin/MainAdmin/addQuestions/$table_name");
 
+    }
+    //Процесс удаление вопроса
+    public function deleteQuestion($id){
+        $table = 'box';
+        $puth = 'main';
+        $result = $this->AdminModels->deleteOne($table, $id,$puth);
+        $tables = 'box_composition';
+        $this->db->where('id_box', $id);
+        $this->db->delete($tables);
+        if ($result == FALSE) {
+            $this->session->set_flashdata('flash_message', 'Упс! Произошла ошибка');
+        } else {
+            $this->session->set_flashdata('success_message', 'Успешно удален!');
+
+        }
+        redirect(site_url() . 'admin/MainSections/allBox');
     }
 
     private function do_upload($location, $name)

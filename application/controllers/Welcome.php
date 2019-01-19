@@ -31,6 +31,8 @@ class Welcome extends CI_Controller {
 
         $config['prev_link'] = '';
         $config['display_pages'] = FALSE;
+        $config['last_link'] = FALSE;
+        $config['first_link'] = FALSE;
 
 
         $this->pagination->initialize($config);
