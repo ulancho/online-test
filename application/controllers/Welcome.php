@@ -34,7 +34,6 @@ class Welcome extends CI_Controller {
         $config['last_link'] = FALSE;
         $config['first_link'] = FALSE;
 
-
         $this->pagination->initialize($config);
 
         $data['question']  = $this->MainModels->selectAll($table_name, $config['per_page'], $this->uri->segment(4));
@@ -42,5 +41,11 @@ class Welcome extends CI_Controller {
         $this->load->view('profession',$data);
 
 
+    }
+
+    public function test(){
+        $this->load->view('header');
+        $this->load->view('tests');
+        $this->load->view('footer');
     }
 }
