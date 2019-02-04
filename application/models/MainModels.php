@@ -29,6 +29,17 @@ class MainModels extends CI_Model
         }
     }
 
+    public function getName($tablename, $name)
+    {
+        $sql = "SELECT * FROM $tablename WHERE name = ?  LIMIT 1";
+        $query = $this->db->query($sql, array($name));
+        if ($query) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
     public function selectAllArray($table)
     {
         $this->db->order_by('id', 'desc');

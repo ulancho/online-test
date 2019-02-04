@@ -716,7 +716,7 @@ header.innerPage{
 	z-index: 1;
 }
 .TestProfSectionBg{
-	background-image: url(../imgae/TestProfSectionBg.jpg);
+	background-image: url(../images/TestProfSectionBg.jpg);
 	background-position: center top;
 	background-repeat:  no-repeat;
 	min-height: 685px;
