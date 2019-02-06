@@ -1,80 +1,86 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Онлайн-тест</title>
-    <link rel="stylesheet" href="<?= base_url() ?>public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= base_url() ?>public/css/testStyle.css">
-    <script src="<?= base_url() ?>public/js/jquery.min.js"></script>
-    <script src="<?= base_url() ?>public/js/test.js" defer></script>
-</head>
-<body>
-<div class="container">
-    <div class="row jumbotron">
-        <input id="url" type="hidden" value="<?= base_url() ?>">
-        <input id="last" type="text" value="<?= $last ?>">
-        <h4>Вопрос:</h4>
-        <div class="col-sm-6 flex-wrap">
-            <ul class="list-unstyled">
-                <?php foreach ($question as $row): ?>
-                    <input type="text" id="id" value="<?= $row['id'] ?>">
-                    <div class="border-questions">
-                        <li><?= $row['question'] ?></li>
-                        <?php if (!empty($row['img_name'])): ?>
-                            <div class="for-img">
-                                <img class="img"
-                                     src="<?= base_url() ?>public/images/question-photo/<?= $row['img_name'] ?>" alt="">
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <h4>Ответы:</h4>
-                    <!-- 111111 -->
-                    <div class="checkbox">
+<section class="testInner">
+    <!--  Хидден инпуты которые нужны для теста  -->
+    <input id="url" type="hidden" value="<?= base_url() ?>">
+    <input id="last" type="hidden" value="<?= $last ?>">
+    <div class="wrapper">
+        <div class="testInnerBlock">
+            <div class="testInnerBlockDes pseudo-bold">
+                <p>В тесте 12 вопросов. Внимательно прочитайте вопрос и из предложенных вариантов, выберите один.
+                    Ответив на вопрос, нажмите на кнопку "Далее". После прохождения теста, не закрывайте окно, пока не
+                    увидите Ваш результат.</p>
+            </div>
+            <!--            <div class="testInnerProgressBarWrap">-->
+            <!--                <div class="testInnerStep">8</div>-->
+            <!--                <div class="testInnerProgressBar">-->
+            <!--                    <span></span>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <div class="testQuestionAnswer">
+                <div class="wrapRadioForm clearfix pseudo-bold">
+                    <?php foreach ($question
+
+                    as $row): ?>
+                    <!--   Инпуты хидден  -->
+                    <input type="hidden" id="id" value="<?= $row['id'] ?>">
+                    <h3><?= $row['question'] ?></h3>
+                    <?php if (!empty($row['img_name'])): ?>
+                        <div class="for-img">
+                            <img class="img" src="<?= base_url() ?>public/images/question-photo/<?= $row['img_name'] ?>"
+                                 alt="">
+                        </div>
+                    <?php endif; ?>
+                    <!--    111111       -->
+                    <label class="CustomizeLabel">
                         <?php if (!empty($row['answer_1']) && $row['img_status'] == 0): ?>
-                            <label><input type="checkbox" name="check[]" data-ans="1" value="1"><?= $row['answer_1'] ?>
-                            </label>
+                            <input type="checkbox" name="check[]" data-ans="1" value="1">
+                            <span class="checkmark"></span>
+                            <span><?= $row['answer_1'] ?></span>
                         <?php elseif (!empty($row['answer_1'])): ?>
                             <div class="for-img">
                                 <img class="img"
                                      src="<?= base_url() ?>public/images/answer-photo/<?= $row['answer_1'] ?>" alt="">
+                                <span class="checkmark"></span>
                                 <input type="checkbox" name="check[]" data-ans="1" value="1">
                             </div>
                         <?php endif; ?>
-                    </div>
-                    <!-- 22222 -->
-                    <div class="checkbox">
+                    </label>
+                    <!--    222222     -->
+                    <label class="CustomizeLabel">
                         <?php if (!empty($row['answer_2']) && $row['img_status'] == 0): ?>
-                            <label><input type="checkbox" name="check[]" data-ans="2" value="2"><?= $row['answer_2'] ?>
-                            </label>
+                            <input type="checkbox" name="check[]" data-ans="2" value="2">
+                            <span class="checkmark"></span>
+                            <span><?= $row['answer_2'] ?></span>
                         <?php elseif (!empty($row['answer_2'])): ?>
                             <div class="for-img">
                                 <img class="img"
                                      src="<?= base_url() ?>public/images/answer-photo/<?= $row['answer_2'] ?>" alt="">
+                                <span class="checkmark"></span>
                                 <input type="checkbox" name="check[]" data-ans="2" value="2">
                             </div>
                         <?php endif; ?>
-                    </div>
-                    <!-- 33333 -->
-                    <div class="checkbox">
+                    </label>
+
+                    <!--    333333      -->
+                    <label class="CustomizeLabel">
                         <?php if (!empty($row['answer_3']) && $row['img_status'] == 0): ?>
-                            <label><input type="checkbox" name="check[]" data-ans="3" value="3"><?= $row['answer_3'] ?>
-                            </label>
+                            <input type="checkbox" name="check[]" data-ans="3" value="3">
+                            <span class="checkmark"></span>
+                            <span><?= $row['answer_3'] ?></span>
                         <?php elseif (!empty($row['answer_3'])): ?>
                             <div class="for-img">
                                 <img class="img"
                                      src="<?= base_url() ?>public/images/answer-photo/<?= $row['answer_3'] ?>" alt="">
+                                <span class="checkmark"></span>
                                 <input type="checkbox" name="check[]" data-ans="3" value="3">
                             </div>
                         <?php endif; ?>
-                    </div>
-                    <!-- 4444 -->
-                    <div class="checkbox">
+                    </label>
+                    <!--   4444      -->
+                    <label class="CustomizeLabel">
                         <?php if (!empty($row['answer_4']) && $row['img_status'] == 0): ?>
-                            <label><input type="checkbox" name="check[]" data-ans="4" value="4"><?= $row['answer_4'] ?>
-                            </label>
+                            <input type="checkbox" name="check[]" data-ans="4" value="4">
+                            <span class="checkmark"></span>
+                            <span><?= $row['answer_4'] ?></span>
                         <?php elseif (!empty($row['answer_4'])): ?>
                             <div class="for-img">
                                 <img class="img"
@@ -82,12 +88,13 @@
                                 <input type="checkbox" name="check[]" data-ans="4" value="4">
                             </div>
                         <?php endif; ?>
-                    </div>
-                    <!-- 5555 -->
-                    <div class="checkbox">
+                    </label>
+                    <!--     555555     -->
+                    <label class="CustomizeLabel">
                         <?php if (!empty($row['answer_5']) && $row['img_status'] == 0): ?>
-                            <label><input type="checkbox" name="check[]" data-ans="5" value="5"><?= $row['answer_5'] ?>
-                            </label>
+                            <input type="checkbox" name="check[]" data-ans="5" value="5">
+                            <span class="checkmark"></span>
+                            <span><?= $row['answer_5'] ?></span>
                         <?php elseif (!empty($row['answer_5'])): ?>
                             <div class="for-img">
                                 <img class="img"
@@ -95,16 +102,18 @@
                                 <input type="checkbox" name="check[]" data-ans="5" value="5">
                             </div>
                         <?php endif; ?>
-                    </div>
-
+                    </label>
+                </div>
                 <?php endforeach; ?>
-            </ul>
+                <div class="testB-submit clearfix">
+                    <div class="testB-submit clearfix">
+                        <button onclick="showend()" style="display: none" class="testSubmitbtn aBtn" id="end_button">Завершить</button>
+                        <?php
+                        echo $this->pagination->create_links();
+                        ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <button onclick="showend()" style="display: none" id="end_button">Завершить</button>
-    <?php
-    echo $this->pagination->create_links();
-    ?>
-</div>
-</body>
-</html>
+</section>

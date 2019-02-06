@@ -134,6 +134,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="<?=base_url()?>public/js/jquery.bxslider.js"></script>
+<script src="<?=base_url()?>public/js/test.js" defer></script>
 <script src="<?=base_url()?>public/js/slick/slick.js"></script>
 <script src="<?=base_url()?>public/js/common.js"></script>
 <script src="<?=base_url()?>public/js/wow.min.js"></script>

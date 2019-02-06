@@ -67,9 +67,9 @@ class Welcome extends CI_Controller
         $config['full_tag_open'] = '<div class="pagination go">';
         $config['full_tag_close'] = '</div>';
 
-        $config['attributes'] = array('class' => 'myclass');
+        $config['attributes'] = array('class' => 'myclass testSubmitbtn aBtn');
         $config['next_link'] = 'Следующая';
-        $config['prev_link'] = '';
+        $config['prev_link'] = FALSE;
         $config['display_pages'] = FALSE;
         $config['last_link'] = FALSE;
         $config['first_link'] = FALSE;
@@ -81,7 +81,9 @@ class Welcome extends CI_Controller
         $data['last'] = $this->uri->segment(4);
 
 
+        $this->load->view('header');
         $this->load->view('profession', $data);
+        $this->load->view('footer');
 
 
     }

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<?=base_url()?>public/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>public/slick/slick-theme.css">
     <link rel="stylesheet" href="<?=base_url()?>public/css/planet.css">
+    <link rel="stylesheet" href="<?=base_url()?>public/css/testStyle.css">
     <title>ItClub</title>
 </head>
 <body>
