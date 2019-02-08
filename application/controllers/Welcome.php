@@ -34,11 +34,11 @@ class Welcome extends CI_Controller
     public function registeruser($name)
     {
         $username = $this->input->post('name');
-        $phone = $this->input->post('phone');
+        $mail = $this->input->post('email');
         $start = time();
         $data = array(
             'name' => $username,
-            'phone' => $phone,
+            'mail' => $mail,
             'start' => $start
         );
         if ($this->db->insert('points', $data)) {
@@ -55,6 +55,8 @@ class Welcome extends CI_Controller
 
     public function profession($name)
     {
+        /*проверка*/
+        if ($this->session->has_userdata('name') == 1){
         $table_name = $name . '_questions';
         $array = array(
             'table_name' => $table_name
@@ -78,12 +80,19 @@ class Welcome extends CI_Controller
         $this->pagination->initialize($config);
 
         $data['question'] = $this->MainModels->selectAll($table_name, $config['per_page'], $this->uri->segment(4));
-        $data['last'] = $this->uri->segment(4);
 
+        $allAnswer = $this->db->from($table_name)->count_all_results();
+        $data['last'] = $this->uri->segment(4);
 
         $this->load->view('header');
         $this->load->view('profession', $data);
         $this->load->view('footer');
+        }
+
+        else{
+            $newURL = base_url();
+            header('Location: ' . $newURL);
+        }
 
 
     }
@@ -126,31 +135,42 @@ class Welcome extends CI_Controller
 
     public function finish()
     {
+        /*проверка*/
+        if ($this->session->has_userdata('name') == 1){
         $username = $this->session->userdata['name'];
         $startTime = $this->session->userdata['start'];
         $tableName= $this->session->userdata['table_name'];
         $stopTime = time();
         $finisTime = $stopTime - $startTime;
-        $finisTimeResult = date("i:s", $finisTime);
-        echo 'потрачено времени:' . $finisTimeResult;
-        echo '<br>';
+        $data['finisTimeResult'] = date("i:s", $finisTime);
+//        echo 'потрачено времени:' . $finisTimeResult;
+//        echo '<br>';
         $points = 'points';
         $point = $this->MainModels->getName($points, $username);
         $ball = $point[0]->points;
-        echo 'баллы:' . $ball;
-        echo '<br>';
+        $data['ball'] = $ball;
+//        echo 'баллы:' . $ball;
+//        echo '<br>';
         $allAnswer = $this->db->from($tableName)->count_all_results();
-        echo 'Всего вопросов:' . $allAnswer;
-        echo '<br>';
+        $data['allAnswer'] = $allAnswer;
+//        echo 'Всего вопросов:' . $allAnswer;
+//        echo '<br>';
         $allAnswer10 = $allAnswer * 10;
         $ball100 = $ball * 100;
-        $proc = $ball100/$allAnswer10;
-        echo 'Процент:' . $proc;
-        echo '<br>';
+        $data['proc'] = round($ball100/$allAnswer10, 2);
+//        echo 'Процент:' . $proc;
+//        echo '<br>';
 
-//        $this->load->view('header');
-//        $this->load->view('tests');
-//        $this->load->view('footer');
+        $this->load->view('header');
+        $this->load->view('finish',$data);
+        $this->load->view('footer');
+        $this->session->sess_destroy();
+        }
+
+        else{
+            $newURL = base_url();
+            header('Location: ' . $newURL);
+        }
     }
 
 

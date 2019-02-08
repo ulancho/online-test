@@ -1,5 +1,5 @@
 <style>
-    input[type=text], select {
+    input[type=text], input[type=email], select {
         width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
@@ -28,8 +28,8 @@
     <form action="<?= base_url() ?>welcome/registeruser/<?= $table ?>" method="post">
         <label for="fname">Имя</label>
         <input type="text" name="name" placeholder="Ваше имя.." required>
-        <label for="lname">Тел номер</label>
-        <input type="text" name="phone" placeholder="Ваш тел номер..">
+        <label for="lemail">Почта</label>
+        <input type="email" name="email" placeholder="Ваш адресс почты.." required>
         <input type="submit" value="Начать">
     </form>
 </section>

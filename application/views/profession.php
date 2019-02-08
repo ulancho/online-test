@@ -1,7 +1,7 @@
 <section class="testInner">
     <!--  Хидден инпуты которые нужны для теста  -->
     <input id="url" type="hidden" value="<?= base_url() ?>">
-    <input id="last" type="hidden" value="<?= $last ?>">
+    <label for="">last:<input id="last" type="text" value="<?= $last ?>"></label>
     <div class="wrapper">
         <div class="testInnerBlock">
             <div class="testInnerBlockDes pseudo-bold">
