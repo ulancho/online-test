@@ -38,7 +38,7 @@
             echo '<td>'.$i++.'</td>';
             echo '<td>'.$row['question'].'</td>';
             echo '<td><a href="'.site_url().'admin/MainSections/updateNews/'.$row['id'].'"><button type="button" class="btn btn-primary">Редактировать</button></a></td>';
-            echo '<td><a href="'.site_url().'admin/MainAdmin/deleteQuestion/'.$row['id'].'"><button type="button" class="btn btn-danger">Удалить</button></a></td>';
+            echo '<td><a href="'.site_url().'admin/MainAdmin/deleteQuestion/'.$row['id'].'/'.$table.'"><button type="button" class="btn btn-danger">Удалить</button></a></td>';
             echo '</tr>';
         }
         ?>

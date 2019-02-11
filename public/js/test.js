@@ -1,7 +1,8 @@
 function showend() {
     let lastpage = document.getElementById('last').value;
+    let all = document.getElementById('all').value;
     let endbutton = document.getElementById('end_button');
-    if (lastpage == 2) {
+    if (lastpage == all) {
         endbutton.style.display = "block";
     }
 }

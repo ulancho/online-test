@@ -26,6 +26,7 @@ class MainAdmin extends CI_Controller
         $data['prof'] = $this->MainModels->getId($table,$id);
         $table_name = $data['prof'][0]->table_name.'_questions';
         $data['questions'] = $this->MainModels->selectAllArray($table_name);
+        $data['table'] = $table_name;
 
         $this->load->view('admin/header');
         $this->load->view('admin/navbar');
@@ -134,12 +135,12 @@ class MainAdmin extends CI_Controller
     //Процесс добавление вопроса
     public function addQuest(){
         $location = 'answer-photo';
-        $location_question = 'question-photo';
+//        $location_question = 'question-photo';
         $questions_file = 'questions_file';
         $img_status = $this->input->post('img-status') ?? "";
         $questions = $this->input->post('questions') ?? "";
+        $questions_file = $this->do_upload($location, $questions_file) ?? "";
         $table_name =  $this->input->post('table');
-        $questions_file = $this->do_upload($location_question, $questions_file) ?? "";
         $table = $table_name.'_questions';
         if (!empty($img_status)){
             $ans1 = 'name-1';
@@ -152,6 +153,7 @@ class MainAdmin extends CI_Controller
             $answer3 = $this->do_upload($location, $ans3) ?? "";
             $answer4 = $this->do_upload($location, $ans4) ?? "";
             $answer5 = $this->do_upload($location, $ans5) ?? "";
+
         }
         else{
             $answer1 = $this->input->post('name-1') ?? "";
@@ -192,13 +194,31 @@ class MainAdmin extends CI_Controller
 
     }
     //Процесс удаление вопроса
-    public function deleteQuestion($id){
-        $table = 'box';
-        $puth = 'main';
-        $result = $this->AdminModels->deleteOne($table, $id,$puth);
-        $tables = 'box_composition';
-        $this->db->where('id_box', $id);
-        $this->db->delete($tables);
+    public function deleteQuestion($id, $table){
+        $puth = 'answer-photo';
+        $get = $this->MainModels->getId($table, $id);
+
+        if (!empty($get[0]->img_name)){
+            $question_img = $this->MainModels->deleteFiles($get[0]->img_name, $puth);
+        }
+        if($get[0]->img_status == 1){
+            $answer1_img = $this->MainModels->deleteFiles($get[0]->answer_1, $puth);
+            $answer2_img = $this->MainModels->deleteFiles($get[0]->answer_2, $puth);
+            $answer3_img = $this->MainModels->deleteFiles($get[0]->answer_3, $puth);
+            $answer4_img = $this->MainModels->deleteFiles($get[0]->answer_4, $puth);
+            $answer5_img = $this->MainModels->deleteFiles($get[0]->answer_5, $puth);
+        }
+
+//                echo "<pre>";
+//        print_r($question_img);
+//        echo "</pre>";
+//        die;
+
+
+        $result = $this->MainModels->deleteOne($table, $id,$puth);
+//        $tables = 'box_composition';
+//        $this->db->where('id_box', $id);
+//        $this->db->delete($tables);
         if ($result == FALSE) {
             $this->session->set_flashdata('flash_message', 'Упс! Произошла ошибка');
         } else {

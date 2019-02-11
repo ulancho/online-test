@@ -2,6 +2,7 @@
     <!--  Хидден инпуты которые нужны для теста  -->
     <input id="url" type="hidden" value="<?= base_url() ?>">
     <label for="">last:<input id="last" type="text" value="<?= $last ?>"></label>
+    <label for="">ALL:<input id="all" type="text" value="<?= $all ?>"></label>
     <div class="wrapper">
         <div class="testInnerBlock">
             <div class="testInnerBlockDes pseudo-bold">
@@ -9,12 +10,6 @@
                     Ответив на вопрос, нажмите на кнопку "Далее". После прохождения теста, не закрывайте окно, пока не
                     увидите Ваш результат.</p>
             </div>
-            <!--            <div class="testInnerProgressBarWrap">-->
-            <!--                <div class="testInnerStep">8</div>-->
-            <!--                <div class="testInnerProgressBar">-->
-            <!--                    <span></span>-->
-            <!--                </div>-->
-            <!--            </div>-->
             <div class="testQuestionAnswer">
                 <div class="wrapRadioForm clearfix pseudo-bold">
                     <?php foreach ($question
@@ -25,7 +20,7 @@
                     <h3><?= $row['question'] ?></h3>
                     <?php if (!empty($row['img_name'])): ?>
                         <div class="for-img">
-                            <img class="img" src="<?= base_url() ?>public/images/question-photo/<?= $row['img_name'] ?>"
+                            <img class="img" src="<?= base_url() ?>public/images/answer-photo/<?= $row['img_name'] ?>"
                                  alt="">
                         </div>
                     <?php endif; ?>

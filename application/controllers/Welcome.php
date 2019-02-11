@@ -83,6 +83,7 @@ class Welcome extends CI_Controller
 
         $allAnswer = $this->db->from($table_name)->count_all_results();
         $data['last'] = $this->uri->segment(4);
+        $data['all'] = (int)$allAnswer - 1;
 
         $this->load->view('header');
         $this->load->view('profession', $data);
@@ -113,7 +114,7 @@ class Welcome extends CI_Controller
         $intersection = array_intersect($ans, $correct_answer); //проверяет схождение массивов
         $intersection = count($intersection);
 
-        $endpoint = $intersection * 10;
+        $endpoint = $intersection;
 
         $points = 'points';
         $point = $this->MainModels->getName($points, $username);
@@ -155,11 +156,28 @@ class Welcome extends CI_Controller
         $data['allAnswer'] = $allAnswer;
 //        echo 'Всего вопросов:' . $allAnswer;
 //        echo '<br>';
-        $allAnswer10 = $allAnswer * 10;
+        $allAnswer10 = $allAnswer;
         $ball100 = $ball * 100;
-        $data['proc'] = round($ball100/$allAnswer10, 2);
+        $procent = round($ball100/$allAnswer10, 2);
+        $data['proc'] = $procent;
 //        echo 'Процент:' . $proc;
 //        echo '<br>';
+            if($procent>0 && $procent <= 20 ){
+                $data['grade'] = 3;
+                $data['result_text'] = 'К СОЖАЛЕНИЮ, ВЫ ЕЩЕ НЕ ДОРОСЛИ ДО УРОВНЯ ДИЗАЙНЕРОВ.';
+            }
+            elseif ($procent>20 && $procent <= 50){
+                $data['grade'] = 4;
+                $data['result_text'] = 'ПОЗДРАВЛЯЕМ! ВАШЕ УПОРСТВО ПРЕОДОЛЕЕТ ВСЕ ПРЕГРАДЫ.';
+            }
+            elseif ($procent>50 && $procent <= 100){
+                $data['grade'] = 5;
+                $data['result_text'] = 'ПОЗДРАВЛЯЕМ! ВАША ПОДГОТОВКА ВЫШЕ ВСЯКИХ ПОХВАЛ.';
+            }
+            else{
+                $data['grade'] = 2;
+                $data['result_text'] = 'Ух тыыыж ни одного правильного ответа.';
+            }
 
         $this->load->view('header');
         $this->load->view('finish',$data);

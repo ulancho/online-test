@@ -25,10 +25,11 @@
                 </li>
             </ul>
             <div class="testInerAssessment">
-                Ваша оценка: <span>5</span>
+                Ваша оценка: <span><?=$grade?></span>
+                <h3><?=$result_text?></h3>
             </div>
             <div class="testInerAssessmentBar">
-                <div><span style="width: 45%;"></span></div>
+                <div><span style="width:<?=$proc?>%;"></span></div>
             </div>
         </div>
     </div>
