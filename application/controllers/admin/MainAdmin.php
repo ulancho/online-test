@@ -27,6 +27,7 @@ class MainAdmin extends CI_Controller
         $table_name = $data['prof'][0]->table_name.'_questions';
         $data['questions'] = $this->MainModels->selectAllArray($table_name);
         $data['table'] = $table_name;
+        $data['id_prof'] = $id;
 
         $this->load->view('admin/header');
         $this->load->view('admin/navbar');
@@ -194,7 +195,7 @@ class MainAdmin extends CI_Controller
 
     }
     //Процесс удаление вопроса
-    public function deleteQuestion($id, $table){
+    public function deleteQuestion($id, $table, $id_profession){
         $puth = 'answer-photo';
         $get = $this->MainModels->getId($table, $id);
 
@@ -209,23 +210,15 @@ class MainAdmin extends CI_Controller
             $answer5_img = $this->MainModels->deleteFiles($get[0]->answer_5, $puth);
         }
 
-//                echo "<pre>";
-//        print_r($question_img);
-//        echo "</pre>";
-//        die;
-
 
         $result = $this->MainModels->deleteOne($table, $id,$puth);
-//        $tables = 'box_composition';
-//        $this->db->where('id_box', $id);
-//        $this->db->delete($tables);
         if ($result == FALSE) {
             $this->session->set_flashdata('flash_message', 'Упс! Произошла ошибка');
         } else {
             $this->session->set_flashdata('success_message', 'Успешно удален!');
 
         }
-        redirect(site_url() . 'admin/MainSections/allBox');
+        redirect(site_url() . "admin/MainAdmin/all/$id_profession");
     }
 
     private function do_upload($location, $name)

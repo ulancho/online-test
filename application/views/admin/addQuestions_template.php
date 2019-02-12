@@ -17,7 +17,7 @@
         <label for="usr">Вопрос:</label>
         <input name="questions" type="text" class="form-control" id="" required>
         <input name="questions_file" type="file" class="form-control">
-        <input name="table" type="text" value="<?=$table_name?>">
+        <input name="table" type="hidden" value="<?=$table_name?>">
     </div>
         <div class="form-group">
             <label class="checkbox-inline"><input name="img-status" onchange="fileNone(this)" type="checkbox" value="1">фото-ответ</label>

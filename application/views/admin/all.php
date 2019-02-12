@@ -1,4 +1,14 @@
 <div class="container">
+    <?php if ($this->session->flashdata ('success_message')): ?>
+        <div class="alert alert-success">
+            <?= $this->session->flashdata ('success_message')?>
+        </div>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata ('flash_message')): ?>
+        <div class="alert alert-danger">
+            <?= $this->session->flashdata ('flash_message')?>
+        </div>
+    <?php endif; ?>
     <section class="content-header">
         <ol class="breadcrumb">
             <li><a href="<?=base_url()?>admin/Admin_page/admin"><i class="fa fa-dashboard"></i>Тест</a></li>
@@ -38,7 +48,7 @@
             echo '<td>'.$i++.'</td>';
             echo '<td>'.$row['question'].'</td>';
             echo '<td><a href="'.site_url().'admin/MainSections/updateNews/'.$row['id'].'"><button type="button" class="btn btn-primary">Редактировать</button></a></td>';
-            echo '<td><a href="'.site_url().'admin/MainAdmin/deleteQuestion/'.$row['id'].'/'.$table.'"><button type="button" class="btn btn-danger">Удалить</button></a></td>';
+            echo '<td><a href="'.site_url().'admin/MainAdmin/deleteQuestion/'.$row['id'].'/'.$table.'/'.$id_prof.'"><button type="button" class="btn btn-danger">Удалить</button></a></td>';
             echo '</tr>';
         }
         ?>
