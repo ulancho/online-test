@@ -210,7 +210,6 @@ class MainAdmin extends CI_Controller
             $answer5_img = $this->MainModels->deleteFiles($get[0]->answer_5, $puth);
         }
 
-
         $result = $this->MainModels->deleteOne($table, $id,$puth);
         if ($result == FALSE) {
             $this->session->set_flashdata('flash_message', 'Упс! Произошла ошибка');
@@ -220,6 +219,38 @@ class MainAdmin extends CI_Controller
         }
         redirect(site_url() . "admin/MainAdmin/all/$id_profession");
     }
+
+    //страничка редактирование вопроса
+    public function updateQuestion($id,$table,$id_profession){
+        $getRow = $this->MainModels->getId($table, $id);
+        $imgStatus =  $getRow[0]->img_status;
+        if ($imgStatus == 1){
+
+
+
+            $this->load->view('admin/header');
+            $this->load->view('admin/navbar');
+            $this->load->view('admin/updateQuestion');
+            $this->load->view('admin/footer');
+        }
+        else{
+            echo "no img";
+        }
+
+
+//        echo "<pre>";
+//        print_r($imgStatus);
+//        echo "</pre>";
+//        die();
+    }
+
+    public function test(){
+        $this->load->view('admin/header');
+        $this->load->view('admin/navbar');
+        $this->load->view('admin/updateQuestion');
+        $this->load->view('admin/footer');
+    }
+
 
     private function do_upload($location, $name)
     {
