@@ -9,6 +9,35 @@ class MainModels extends CI_Model
         $this->load->database();
     }
 
+    public function updateProfession($arr){
+        $data = array(
+            'name' => $arr['name'],
+        );
+
+        $this->db->where('id', $arr['id']);
+        $this->db->update('profession', $data);
+
+        $success = $this->db->affected_rows();
+
+        if (!$success) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function deleteOneColumn($id,$tb){
+        $this->db->where('id', $id);
+        $this->db->delete($tb);
+
+        $success = $this->db->affected_rows();
+        if (!$success) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function addTest($row){
         $string = array(
             'name' => $row['name'],

@@ -22,5 +22,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="<?php echo base_url().'public/css/adminStyle.css' ?>">
     <!--JS-->
     <script src="<?=base_url()?>public/js/jquery.min.js"></script>
+    <script src="<?=base_url()?>public/js/jquery.admin.js"></script>
 </head>
 <body>

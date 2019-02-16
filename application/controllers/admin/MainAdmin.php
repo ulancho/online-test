@@ -234,7 +234,7 @@ class MainAdmin extends CI_Controller
             $this->load->view('admin/footer');
         }
         else{
-            echo "no img";
+            echo "netu img";
         }
 
 
@@ -244,11 +244,60 @@ class MainAdmin extends CI_Controller
 //        die();
     }
 
+    //редактирование название професси
+    public function updateProfession(){
+        $array['id'] = $this->input->post('id-prof');
+        $array['name'] = trim($this->input->post('name-prof'));
+
+        if (!$this->MainModels->updateProfession($array)) {
+            $this->session->set_flashdata('flash_message', 'Не удалось обновить данные!');
+        } else {
+            $this->session->set_flashdata('success_message', 'Данные успешно обновлены.');
+        }
+        redirect(site_url() . 'admin/Admin_page/admin/');
+    }
+    //удаление профессии
+    public function deleteProfession(){
+        $table = 'profession';
+        $id = $this->input->post('id-prof');
+        $row = $this->MainModels->getId($table,$id);
+        $prof_name = $row[0]->table_name.'_questions';
+        $puth = 'answer-photo';
+
+        $question_array = $this->MainModels->selectAllArray($prof_name);
+
+        foreach ($question_array as $rows){
+            if (!empty($rows['img_name'])){
+                $this->MainModels->deleteFiles($rows['img_name'], $puth);
+            }
+            if ($rows['img_status'] == 1){
+                 !empty($rows['answer_1']) ? $this->MainModels->deleteFiles($rows['answer_1'], $puth) : '';
+                 !empty($rows['answer_2']) ? $this->MainModels->deleteFiles($rows['answer_2'], $puth) : '';
+                 !empty($rows['answer_3']) ? $this->MainModels->deleteFiles($rows['answer_3'], $puth) : '';
+                 !empty($rows['answer_4']) ? $this->MainModels->deleteFiles($rows['answer_4'], $puth) : '';
+                 !empty($rows['answer_5']) ? $this->MainModels->deleteFiles($rows['answer_5'], $puth) : '';
+            }
+        }
+
+        if (!$this->dbforge->drop_table($prof_name,TRUE) || !$this->MainModels->deleteOneColumn($id,$table)) {
+            $this->session->set_flashdata('flash_message', 'Не удалось удалить профессию!');
+        } else {
+            $this->session->set_flashdata('success_message', 'Данные успешно удалены.');
+        }
+        redirect(site_url() . 'admin/Admin_page/admin/');
+
+    }
+
     public function test(){
-        $this->load->view('admin/header');
-        $this->load->view('admin/navbar');
-        $this->load->view('admin/updateQuestion');
-        $this->load->view('admin/footer');
+        $id = 8;
+        $table = 'profession';
+        if($this->MainModels->deleteOneColumn($id,$table)){
+            echo "delete";
+        }
+        else{
+            echo "no delete";
+        }
+
     }
 
 
@@ -256,7 +305,7 @@ class MainAdmin extends CI_Controller
     {
         $config['upload_path'] = './public/images/' . $location . '/';
         $config['allowed_types'] = 'jpeg|jpg|png';
-        $config['max_size'] = 1000;
+        $config['max_size'] = 2500;
         $config['max_width'] = 1000;
         $config['max_height'] = 1000;
         $config['encrypt_name'] = TRUE;
