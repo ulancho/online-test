@@ -6,6 +6,20 @@ $(document).ready(function() {
         $('.id-prof').val(id);
     });
 
+    $('.stat').on('change',function () {
+         let id = $(this).data('id');
+         let url = $('#url').val();
+        $.ajax({
+            method:"POST",
+            dataType:'JSON',
+            url:url+"admin/MainAdmin/upStatus",
+            data:{id:id}
+
+        }).done(function(){
+            alert('Статус изменен');
+        });
+    });
+
 
 
 });

@@ -11,6 +11,7 @@
     <?php endif; ?>
     <a href="<?= base_url() ?>admin/MainAdmin/addTest" class="btn btn-success">Добавить тест</a>
     <div class="row">
+        <input type="hidden" value="<?=base_url()?>" id="url">
         <?php foreach ($profession as $row): ?>
             <div class="col-md-3">
                 <div class="card-counter primary">
@@ -23,6 +24,11 @@
                        data-name="<?= $row['name'] ?>" data-toggle="modal" data-target="#editProf"></i>
                     <i title="Удаление профессии" class="glyphicon glyphicon-trash delete-profession" data-id="<?= $row['id'] ?>"
                        data-name="<?= $row['name'] ?>" data-toggle="modal" data-target="#deleteProf"></i>
+                    <?php if ($row['status'] == 0): ?>
+                        <label class="checkbox-inline stat"><input data-id="<?=$row['id']?>" class="stat" type="checkbox"  checked>Статус</label>
+                    <?php elseif ($row['status'] == 1): ?>
+                        <label class="checkbox-inline"><input data-id="<?=$row['id']?>" class="stat" type="checkbox">Статус</label>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endforeach; ?>

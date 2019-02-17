@@ -18,6 +18,7 @@ class MainAdmin extends CI_Controller
         if (empty($arraydata)) {
             redirect(site_url() . 'admin/Admin_page/');
         }
+       //error_reporting(0);
     }
 
     public function all($id){
@@ -203,14 +204,14 @@ class MainAdmin extends CI_Controller
             $question_img = $this->MainModels->deleteFiles($get[0]->img_name, $puth);
         }
         if($get[0]->img_status == 1){
-            $answer1_img = $this->MainModels->deleteFiles($get[0]->answer_1, $puth);
-            $answer2_img = $this->MainModels->deleteFiles($get[0]->answer_2, $puth);
-            $answer3_img = $this->MainModels->deleteFiles($get[0]->answer_3, $puth);
-            $answer4_img = $this->MainModels->deleteFiles($get[0]->answer_4, $puth);
-            $answer5_img = $this->MainModels->deleteFiles($get[0]->answer_5, $puth);
+            !empty($get[0]->answer_2) ? $this->MainModels->deleteFiles($get[0]->answer_1, $puth) : '';
+            !empty($get[0]->answer_2) ? $this->MainModels->deleteFiles($get[0]->answer_2, $puth) : '';
+            !empty($get[0]->answer_3) ? $this->MainModels->deleteFiles($get[0]->answer_3, $puth) : '';
+            !empty($get[0]->answer_4) ? $this->MainModels->deleteFiles($get[0]->answer_4, $puth) : '';
+            !empty($get[0]->answer_5) ? $this->MainModels->deleteFiles($get[0]->answer_5, $puth) : '';
         }
 
-        $result = $this->MainModels->deleteOne($table, $id,$puth);
+        $result = $this->MainModels->deleteOneColumn($id,$table);
         if ($result == FALSE) {
             $this->session->set_flashdata('flash_message', 'Упс! Произошла ошибка');
         } else {
@@ -224,19 +225,11 @@ class MainAdmin extends CI_Controller
     public function updateQuestion($id,$table,$id_profession){
         $getRow = $this->MainModels->getId($table, $id);
         $imgStatus =  $getRow[0]->img_status;
-        if ($imgStatus == 1){
-
-
-
-            $this->load->view('admin/header');
-            $this->load->view('admin/navbar');
-            $this->load->view('admin/updateQuestion');
-            $this->load->view('admin/footer');
-        }
-        else{
-            echo "netu img";
-        }
-
+        $data['row'] = $getRow;
+        $this->load->view('admin/header');
+        $this->load->view('admin/navbar');
+        $this->load->view('admin/updateQuestion',$data);
+        $this->load->view('admin/footer');
 
 //        echo "<pre>";
 //        print_r($imgStatus);
@@ -287,6 +280,23 @@ class MainAdmin extends CI_Controller
         redirect(site_url() . 'admin/Admin_page/admin/');
 
     }
+    //изменение статуса профессии
+    public function upStatus(){
+        $table = 'profession';
+        $id = $this->input->post('id');
+        $get = $this->MainModels->getId($table, $id);
+        $status = $get[0]->status;
+        if ($status == 1){
+            $array['status'] = 0;
+        }
+        elseif($status == 0){
+            $array['status'] = 1;
+        }
+        $array['id'] = $id;
+
+        $this->MainModels->updateStatus($array) ? $json['succes'] = 1 : $json['succes'] = 0;
+        echo json_encode($json);
+    }
 
     public function test(){
         $id = 8;
@@ -299,8 +309,7 @@ class MainAdmin extends CI_Controller
         }
 
     }
-
-
+    // загрузка файлов
     private function do_upload($location, $name)
     {
         $config['upload_path'] = './public/images/' . $location . '/';

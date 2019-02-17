@@ -26,6 +26,23 @@ class MainModels extends CI_Model
         }
     }
 
+    public function updateStatus($array){
+        $data = array(
+            'status' => $array['status'],
+        );
+
+        $this->db->where('id', $array['id']);
+        $this->db->update('profession', $data);
+
+        $success = $this->db->affected_rows();
+
+        if (!$success) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function deleteOneColumn($id,$tb){
         $this->db->where('id', $id);
         $this->db->delete($tb);
@@ -73,6 +90,12 @@ class MainModels extends CI_Model
     {
         $this->db->order_by('id', 'desc');
         $query = $this->db->get($table);
+        return $query->result_array();
+    }
+
+    public function SelectProf(){
+        $this->db->where('status', 0);
+        $query = $this->db->get('profession');
         return $query->result_array();
     }
 

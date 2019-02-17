@@ -12,12 +12,12 @@ class Welcome extends CI_Controller
         $this->load->model('MainModels');
         $this->load->library('session');
         $this->load->database();
+        error_reporting(0);
     }
 
     public function index()
     {
-        $table = 'profession';
-        $data['profession'] = $this->MainModels->selectAllArray($table);
+        $data['profession'] = $this->MainModels->SelectProf();
         $this->load->view('header');
         $this->load->view('index', $data);
         $this->load->view('footer');
@@ -47,7 +47,7 @@ class Welcome extends CI_Controller
                 'start' => $start
             );
             $this->session->set_userdata($array);
-            $newURL = base_url() . "/welcome/profession/$name";
+            $newURL = base_url() . "welcome/profession/$name";
             header('Location: ' . $newURL);
         }
 
