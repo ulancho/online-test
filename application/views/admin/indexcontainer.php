@@ -24,6 +24,8 @@
                        data-name="<?= $row['name'] ?>" data-toggle="modal" data-target="#editProf"></i>
                     <i title="Удаление профессии" class="glyphicon glyphicon-trash delete-profession" data-id="<?= $row['id'] ?>"
                        data-name="<?= $row['name'] ?>" data-toggle="modal" data-target="#deleteProf"></i>
+                    <i title="Добавление результата" class="glyphicon glyphicon-education add-result" data-id="<?= $row['id'] ?>"
+                       data-name="<?= $row['name'] ?>" data-toggle="modal" data-target="#addResult"></i>
                     <?php if ($row['status'] == 0): ?>
                         <label class="checkbox-inline stat"><input data-id="<?=$row['id']?>" class="stat" type="checkbox"  checked>Статус</label>
                     <?php elseif ($row['status'] == 1): ?>
@@ -84,4 +86,57 @@
             </div>
         </div>
         <!-- Delete profession Modal -->
+
+        <!-- Add profession result Modal -->
+        <div class="modal fade" id="addResult" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Добавление результата</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h3 class="profession-name"></h3>
+                        <form action="javascript:void(0)" id="formAddResult">
+                            <h4>1)До 20 баллов</h4>
+                            <div class="form-group">
+                                <input type="hidden" name="id" class="id-prof">
+                                <label for="">Главный текст:</label>
+                                <input type="text" class="form-control" name="main-result-20" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Дополнительный текст:</label>
+                                <textarea class="form-control" rows="5" name="dop-result-20" required></textarea>
+                            </div>
+                            <hr>
+                            <h4>1)До 50 баллов</h4>
+                            <div class="form-group">
+                                <label for="">Главный текст:</label>
+                                <input type="text" class="form-control" name="main-result-50" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Дополнительный текст:</label>
+                                <textarea class="form-control" rows="5" name="dop-result-50" required></textarea>
+                            </div>
+                            <hr>
+                            <h4>1)До 90 баллов</h4>
+                            <div class="form-group">
+                                <label for="">Главный текст:</label>
+                                <input type="text" class="form-control" name="main-result-90" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Дополнительный текст:</label>
+                                <textarea class="form-control" rows="5" name="dop-result-90" required></textarea>
+                            </div>
+                            <hr>
+                            <input type="submit" class="btn btn-default" value="Изменить">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Add profession result Modal -->
     </div>

@@ -141,6 +141,8 @@ class Welcome extends CI_Controller
         $username = $this->session->userdata['name'];
         $startTime = $this->session->userdata['start'];
         $tableName= $this->session->userdata['table_name'];
+         $tbl =  str_replace('_questions', '', $tableName);
+
         $stopTime = time();
         $finisTime = $stopTime - $startTime;
         $data['finisTimeResult'] = date("i:s", $finisTime);
@@ -162,22 +164,23 @@ class Welcome extends CI_Controller
         $data['proc'] = $procent;
 //        echo 'Процент:' . $proc;
 //        echo '<br>';
-            if($procent>0 && $procent <= 20 ){
+            $res = $this->MainModels->getProffesion($tbl);
+            if($procent>=0 && $procent <= 20 ){
                 $data['grade'] = 3;
-                $data['result_text'] = 'К СОЖАЛЕНИЮ, ВЫ ЕЩЕ НЕ ДОРОСЛИ ДО УРОВНЯ ДИЗАЙНЕРОВ.';
+                $data['result_text'] = $res[0]->main20;
+                $data['dop_text'] = $res[0]->dop20;
             }
             elseif ($procent>20 && $procent <= 50){
                 $data['grade'] = 4;
-                $data['result_text'] = 'ПОЗДРАВЛЯЕМ! ВАШЕ УПОРСТВО ПРЕОДОЛЕЕТ ВСЕ ПРЕГРАДЫ.';
+                $data['result_text'] = $res[0]->main50;
+                $data['dop_text'] = $res[0]->dop50;
             }
-            elseif ($procent>50 && $procent <= 100){
+            elseif ($procent>50){
                 $data['grade'] = 5;
-                $data['result_text'] = 'ПОЗДРАВЛЯЕМ! ВАША ПОДГОТОВКА ВЫШЕ ВСЯКИХ ПОХВАЛ.';
+                $data['result_text'] =  $res[0]->main90;
+                $data['dop_text'] =  $res[0]->dop90;
             }
-            else{
-                $data['grade'] = 2;
-                $data['result_text'] = 'Ух тыыыж ни одного правильного ответа.';
-            }
+
 
         $this->load->view('header');
         $this->load->view('finish',$data);

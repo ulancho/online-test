@@ -18,7 +18,7 @@ class MainAdmin extends CI_Controller
         if (empty($arraydata)) {
             redirect(site_url() . 'admin/Admin_page/');
         }
-       //error_reporting(0);
+       error_reporting(0);
     }
 
     public function all($id){
@@ -295,6 +295,24 @@ class MainAdmin extends CI_Controller
         $array['id'] = $id;
 
         $this->MainModels->updateStatus($array) ? $json['succes'] = 1 : $json['succes'] = 0;
+        echo json_encode($json);
+    }
+
+    //добавление резултата профессии
+    public function addResult(){
+        $array['id'] = trim($this->input->post('id'));
+        $array['main20'] = trim($this->input->post('main-result-20'));
+        $array['dop20'] = trim($this->input->post('dop-result-20'));
+        $array['main50'] = trim($this->input->post('main-result-50'));
+        $array['dop50'] = trim($this->input->post('dop-result-50'));
+        $array['main90'] = trim($this->input->post('main-result-90'));
+        $array['dop90'] = trim($this->input->post('dop-result-90'));
+
+        if (!$this->MainModels->AddProfessionResult($array)) {
+               $json['succes'] = 0;
+        } else {
+            $json['succes'] = 1;
+        }
         echo json_encode($json);
     }
 

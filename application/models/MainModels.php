@@ -43,6 +43,28 @@ class MainModels extends CI_Model
         }
     }
 
+    public function AddProfessionResult($r){
+        $data = array(
+            'main20' => $r['main20'],
+            'dop20' => $r['dop20'],
+            'main50' => $r['main50'],
+            'dop50' => $r['dop50'],
+            'main90' => $r['main90'],
+            'dop90' => $r['dop90'],
+        );
+
+        $this->db->where('id', $r['id']);
+        $this->db->update('profession', $data);
+
+        $success = $this->db->affected_rows();
+
+        if (!$success) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function deleteOneColumn($id,$tb){
         $this->db->where('id', $id);
         $this->db->delete($tb);
@@ -68,6 +90,18 @@ class MainModels extends CI_Model
     {
         $sql = "SELECT * FROM $tablename WHERE id = ?  LIMIT 1";
         $query = $this->db->query($sql, array($id));
+        if ($query) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
+    // Select with where po id
+    public function getProffesion($tbl)
+    {
+        $sql = "SELECT * FROM profession WHERE table_name = ?  LIMIT 1";
+        $query = $this->db->query($sql, array($tbl));
         if ($query) {
             return $query->result();
         } else {

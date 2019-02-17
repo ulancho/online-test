@@ -1,2 +1,8 @@
 .file{display: none}
 .img{height: 198px;width: 198px;}
+hr{
+    border: none; /* Убираем границу */
+    background-color: #120b1a; /* Цвет линии */
+    color: #11171a; /* Цвет линии для IE6-7 */
+    height: 1px; /* Толщина линии */
+}

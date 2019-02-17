@@ -27,6 +27,7 @@
             <div class="testInerAssessment">
                 Ваша оценка: <span><?=$grade?></span>
                 <h3><?=$result_text?></h3>
+                <h5><?=$dop_text?></h5>
             </div>
             <div class="testInerAssessmentBar">
                 <div><span style="width:<?=$proc?>%;"></span></div>
