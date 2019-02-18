@@ -316,6 +316,21 @@ class MainAdmin extends CI_Controller
         echo json_encode($json);
     }
 
+    public function getResult(){
+        $table = 'profession';
+        $id = $this->input->post('id');
+        $row = $this->MainModels->getId($table,$id);
+
+        if (!empty($row[0]->main20) || !empty($row[0]->dop20)){
+            $json['succes'] = 1;
+            $json['row'] = $row;
+        }
+        else{
+            $json['succes'] = 0;
+        }
+        echo json_encode($json);
+    }
+
     public function test(){
         $id = 8;
         $table = 'profession';

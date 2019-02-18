@@ -112,3 +112,35 @@
         </div>
     </div>
 </section>
+<script type="text/javascript">
+    window.onload = function() {
+        var inp = document.getElementsByTagName('INPUT');
+        var chk_boxes = [];
+        var cnt = 0;
+        for(var ee=0; ee < inp.length; ++ee) {
+            var e = inp[ee];
+            if(e.type !== 'checkbox') continue;
+            chk_boxes.push(e);
+            e.addEventListener('change', function(){
+                var need = false, state;
+                if(this.checked) {
+                    ++cnt;
+                    need = cnt === 2;
+                    state = true;
+                }
+                else {
+                    --cnt;
+                    need = cnt === 1;
+                    state = false;
+                }
+                if(need) {
+                    chk_boxes.forEach(function(c) {
+                        if(!c.checked) {
+                            c.disabled = state;
+                        }
+                    });
+                }
+            })
+        }
+    };
+</script>

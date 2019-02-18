@@ -102,31 +102,31 @@
                             <div class="form-group">
                                 <input type="hidden" name="id" class="id-prof">
                                 <label for="">Главный текст:</label>
-                                <input type="text" class="form-control" name="main-result-20" required>
+                                <input type="text" id="main20" class="form-control" name="main-result-20" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Дополнительный текст:</label>
-                                <textarea class="form-control" rows="5" name="dop-result-20" required></textarea>
+                                <textarea id="dop20" class="form-control" rows="5" name="dop-result-20" required></textarea>
                             </div>
                             <hr>
                             <h4>1)До 50 баллов</h4>
                             <div class="form-group">
                                 <label for="">Главный текст:</label>
-                                <input type="text" class="form-control" name="main-result-50" required>
+                                <input id="main50" type="text" class="form-control" name="main-result-50" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Дополнительный текст:</label>
-                                <textarea class="form-control" rows="5" name="dop-result-50" required></textarea>
+                                <textarea id="dop50" class="form-control" rows="5" name="dop-result-50" required></textarea>
                             </div>
                             <hr>
                             <h4>1)До 90 баллов</h4>
                             <div class="form-group">
                                 <label for="">Главный текст:</label>
-                                <input type="text" class="form-control" name="main-result-90" required>
+                                <input id="main90" type="text" class="form-control" name="main-result-90" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Дополнительный текст:</label>
-                                <textarea class="form-control" rows="5" name="dop-result-90" required></textarea>
+                                <textarea id="dop90" class="form-control" rows="5" name="dop-result-90" required></textarea>
                             </div>
                             <hr>
                             <input type="submit" class="btn btn-default" value="Изменить">
@@ -140,3 +140,4 @@
         </div>
         <!--  Add profession result Modal -->
     </div>
+    <div class="modalLoad"></div>

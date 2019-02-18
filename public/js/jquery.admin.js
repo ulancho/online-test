@@ -5,6 +5,7 @@ $(document).ready(function() {
         $('.name-prof').val(name);
         $('.id-prof').val(id);
     });
+
     $('.add-result').on('click', function(){
         var id = $(this).data('id');
         var name = $(this).data('name');
@@ -23,6 +24,31 @@ $(document).ready(function() {
 
         }).done(function(){
             alert('Статус изменен');
+        });
+    });
+
+    $('.add-result').on('click',function () {
+        let url = $('#url').val();
+        let id  = $(this).data('id');
+         $('body').addClass("loading");
+        $.ajax({
+            method:"POST",
+            dataType:'JSON',
+            url:url+"admin/MainAdmin/getResult",
+            data:{id:id}
+        }).done(function(data){
+             $('body').removeClass("loading");
+            if (data['succes'] == 1){
+                $('#main20').val(data.row[0].main20);
+                $('#dop20').val(data.row[0].dop20);
+                $('#main50').val(data.row[0].main50);
+                $('#dop50').val(data.row[0].dop50);
+                $('#main90').val(data.row[0].main90);
+                $('#dop90').val(data.row[0].dop90);
+            }else if(data['succes'] == 0){
+
+            }
+
         });
     });
 
