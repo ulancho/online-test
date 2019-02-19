@@ -331,15 +331,10 @@ class MainAdmin extends CI_Controller
         echo json_encode($json);
     }
 
+    //тестовая функция
     public function test(){
-        $id = 8;
-        $table = 'profession';
-        if($this->MainModels->deleteOneColumn($id,$table)){
-            echo "delete";
-        }
-        else{
-            echo "no delete";
-        }
+      $val =  "<h1>uln</h1>";
+      echo htmlentities($val);
 
     }
     // загрузка файлов

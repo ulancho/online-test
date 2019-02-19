@@ -28,6 +28,12 @@ $(document).ready(function() {
     });
 
     $('.add-result').on('click',function () {
+        $('#main20').val('');
+        $('#dop20').val('');
+        $('#main50').val('');
+        $('#dop50').val('');
+        $('#main90').val('');
+        $('#dop90').val('');
         let url = $('#url').val();
         let id  = $(this).data('id');
          $('body').addClass("loading");
@@ -46,8 +52,14 @@ $(document).ready(function() {
                 $('#main90').val(data.row[0].main90);
                 $('#dop90').val(data.row[0].dop90);
             }else if(data['succes'] == 0){
-
+                $('#main20').val('');
+                $('#dop20').val('');
+                $('#main50').val('');
+                $('#dop50').val('');
+                $('#main90').val('');
+                $('#dop90').val('');
             }
+
 
         });
     });
@@ -62,7 +74,6 @@ $(document).ready(function() {
             data:form,
             contentType:false,
             processData:false
-
         }).done(function(data){
             if (data['succes'] == 1) {
                 alert('Результат добавлен');
@@ -70,7 +81,7 @@ $(document).ready(function() {
             else{
                 alert('Произошла ошибка');
             }
-
+            $("#addResult .close").click();
         });
     });
 

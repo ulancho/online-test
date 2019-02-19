@@ -27,7 +27,7 @@
                     <i title="Добавление результата" class="glyphicon glyphicon-education add-result" data-id="<?= $row['id'] ?>"
                        data-name="<?= $row['name'] ?>" data-toggle="modal" data-target="#addResult"></i>
                     <?php if ($row['status'] == 0): ?>
-                        <label class="checkbox-inline stat"><input data-id="<?=$row['id']?>" class="stat" type="checkbox"  checked>Статус</label>
+                        <label class="checkbox-inline"><input data-id="<?=$row['id']?>" class="stat" type="checkbox"  checked>Статус</label>
                     <?php elseif ($row['status'] == 1): ?>
                         <label class="checkbox-inline"><input data-id="<?=$row['id']?>" class="stat" type="checkbox">Статус</label>
                     <?php endif; ?>

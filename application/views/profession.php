@@ -17,7 +17,7 @@
                     as $row): ?>
                     <!--   Инпуты хидден  -->
                     <input type="hidden" id="id" value="<?= $row['id'] ?>">
-                    <h3><?= $row['question'] ?></h3>
+                    <h3><?= htmlentities($row['question']) ?></h3>
                     <?php if (!empty($row['img_name'])): ?>
                         <div class="for-img">
                             <img class="img" src="<?= base_url() ?>public/images/answer-photo/<?= $row['img_name'] ?>"
@@ -29,7 +29,7 @@
                         <?php if (!empty($row['answer_1']) && $row['img_status'] == 0): ?>
                             <input type="checkbox" name="check[]" data-ans="1" value="1">
                             <span class="checkmark"></span>
-                            <span><?= $row['answer_1'] ?></span>
+                            <span><?= htmlentities($row['answer_1']) ?></span>
                         <?php elseif (!empty($row['answer_1'])): ?>
                             <div class="for-img">
                                 <img class="img"
@@ -44,7 +44,7 @@
                         <?php if (!empty($row['answer_2']) && $row['img_status'] == 0): ?>
                             <input type="checkbox" name="check[]" data-ans="2" value="2">
                             <span class="checkmark"></span>
-                            <span><?= $row['answer_2'] ?></span>
+                            <span><?= htmlentities($row['answer_2']) ?></span>
                         <?php elseif (!empty($row['answer_2'])): ?>
                             <div class="for-img">
                                 <img class="img"
@@ -60,7 +60,7 @@
                         <?php if (!empty($row['answer_3']) && $row['img_status'] == 0): ?>
                             <input type="checkbox" name="check[]" data-ans="3" value="3">
                             <span class="checkmark"></span>
-                            <span><?= $row['answer_3'] ?></span>
+                            <span><?= htmlentities($row['answer_3']) ?></span>
                         <?php elseif (!empty($row['answer_3'])): ?>
                             <div class="for-img">
                                 <img class="img"
@@ -75,7 +75,7 @@
                         <?php if (!empty($row['answer_4']) && $row['img_status'] == 0): ?>
                             <input type="checkbox" name="check[]" data-ans="4" value="4">
                             <span class="checkmark"></span>
-                            <span><?= $row['answer_4'] ?></span>
+                            <span><?= htmlentities($row['answer_4']) ?></span>
                         <?php elseif (!empty($row['answer_4'])): ?>
                             <div class="for-img">
                                 <img class="img"
@@ -89,7 +89,7 @@
                         <?php if (!empty($row['answer_5']) && $row['img_status'] == 0): ?>
                             <input type="checkbox" name="check[]" data-ans="5" value="5">
                             <span class="checkmark"></span>
-                            <span><?= $row['answer_5'] ?></span>
+                            <span><?= htmlentities($row['answer_5']) ?></span>
                         <?php elseif (!empty($row['answer_5'])): ?>
                             <div class="for-img">
                                 <img class="img"
